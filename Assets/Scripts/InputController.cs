@@ -30,6 +30,11 @@ public class InputController : MonoBehaviour
     void Awake() {
         controls = new Input();
     }
+    
+    public void DisablePlayerControls() {
+        controls.Player1.Disable();
+        controls.Player2.Disable();
+    }
 
     private void OnEnable() {
         controls.Player1.Enable();
@@ -45,6 +50,7 @@ public class InputController : MonoBehaviour
         controls.UI.Enable();
         controls.UI.Pause.performed += OnPause;
     }
+
 
     private bool IdentifyPlayer(int player) {
         return player == 1;

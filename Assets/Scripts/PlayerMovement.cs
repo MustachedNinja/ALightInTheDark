@@ -11,8 +11,11 @@ public class PlayerMovement : MonoBehaviour {
     [SerializeField] private Transform groundCheck;
     [SerializeField] private Transform ceilingCheck;
     [SerializeField] private Collider2D crouchDisableCollider;
+    [SerializeField] private float levelLimit = -10f;
+    [SerializeField] private LevelManager manager = null;
 
-    const float groundedRadius = 0.2f;
+
+    const float groundedRadius = 0.1f;
     private bool isGrounded;
     const float ceilingRadius = 0.2f;
     private Rigidbody2D rb2D;
@@ -60,6 +63,9 @@ public class PlayerMovement : MonoBehaviour {
     }
 
     private void Update() {
+        if (transform.position.y < levelLimit) {
+            manager.ReloadLevel();
+        }
         Move(direction * movementSpeed * Time.deltaTime, false);
     }
 

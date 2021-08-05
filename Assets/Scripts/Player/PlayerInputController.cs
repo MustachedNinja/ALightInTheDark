@@ -11,8 +11,9 @@ using UnityEngine.Events;
 
 public class PlayerInputController : MonoBehaviour
 {
+    public enum Player { Player1, Player2 };
 
-    [SerializeField] private InputActions _inputActions;
+    public Player player;
 
     public Player1MoveInputEvent player1MoveInputEvent;
     public Player1JumpEvent player1JumpEvent;
@@ -20,13 +21,18 @@ public class PlayerInputController : MonoBehaviour
     public Player2MoveInputEvent player2MoveInputEvent;
     public Player2JumpEvent player2JumpEvent;
 
+    private InputActions _inputActions;
+
     private void Awake() {
         _inputActions = new InputActions();
     }
 
     private void OnEnable() {
-        EnablePlayer1Actions();
-        EnablePlayer2Actions();
+        if (player == Player.Player1) {
+            EnablePlayer1Actions();
+        } else if (player == Player.Player2) {
+            EnablePlayer2Actions();
+        }
     }
 
     private void EnablePlayer1Actions() {

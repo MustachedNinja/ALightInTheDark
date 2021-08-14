@@ -6,7 +6,7 @@ using UnityEngine.Events;
 public class LevelEndZone : MonoBehaviour
 {
 
-    [SerializeField] public UnityEvent _levelCompleteEvent;
+    [SerializeField] public GameEvent _levelCompleteEvent;
 
     private int playerInsideCount = 0;
 
@@ -15,7 +15,7 @@ public class LevelEndZone : MonoBehaviour
     void Update() {
         if (playerInsideCount == 2 && !isLevelComplete) {
             isLevelComplete = true;
-
+            _levelCompleteEvent.Invoke();
         }
     }
 

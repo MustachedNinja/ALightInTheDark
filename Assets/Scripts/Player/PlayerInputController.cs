@@ -34,6 +34,10 @@ public class PlayerInputController : MonoBehaviour
             EnablePlayer2Actions();
         }
     }
+    
+    private void OnDisable() {
+        DisableActions();
+    }
 
     private void EnablePlayer1Actions() {
         _inputActions.Player1.Enable();
@@ -49,6 +53,14 @@ public class PlayerInputController : MonoBehaviour
         _inputActions.Player2.Jump.performed += OnPlayerJump(player2JumpEvent);
     }
 
+    private void DisablePlayer1Actions() {
+        _inputActions.Player1.Disable();
+    }
+
+    private void DisablePlayer2Actions() {
+        _inputActions.Player2.Disable();
+    }
+
     private Action<InputAction.CallbackContext> OnPlayerMove(UnityEvent<float> moveEvent) {
         return (context) => { 
             float moveInput = context.ReadValue<float>(); 
@@ -60,5 +72,13 @@ public class PlayerInputController : MonoBehaviour
         return (context) => {
             jumpEvent.Invoke();
         };
+    }
+
+    public void DisableActions() {
+        if (player == Player.Player1) {
+            DisablePlayer1Actions();
+        } else {
+            DisablePlayer2Actions();
+        }
     }
 }
